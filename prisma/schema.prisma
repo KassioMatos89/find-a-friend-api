@@ -5,11 +5,80 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
+  orgs          Org[]
+}
+
+model Org {
+  id         String   @id @default(uuid())
+  name       String
+  cep        String
+  adress     String
+  whatsapp   String
+  created_at DateTime @default(now())
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  pets Pet[]
+
+  @@map("orgs")
+}
+
+enum Stage {
+  Filhote
+  Adulto
+}
+
+enum PET_SIZE {
+  Pequenino
+  Médio
+  Grande
+}
+
+enum Energy {
+  Baixa
+  Moderada
+  Alta
+}
+
+enum Independence {
+  Baixa
+  Moderada
+  Alta
+}
+
+enum Environment {
+  Pequeno
+  Moderado
+  Amplo
+}
+
+model Pet {
+  id                 String       @id @default(uuid())
+  name               String
+  about              String
+  life_stage         Stage        @default(Filhote)
+  size               PET_SIZE     @default(Pequenino)
+  energy_level       Energy       @default(Moderada)
+  independence_level Independence @default(Moderada)
+  environment        Environment  @default(Moderado)
+  city               String
+
+  org    Org    @relation(fields: [org_id], references: [id])
+  org_id String
+
+  @@map("pets")
 }

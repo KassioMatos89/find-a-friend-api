@@ -4,13 +4,15 @@
   "description": "Find a Friend App",
   "main": "index.js",
   "scripts": {
-    "start:dev": "tsx watch src/server.ts"
+    "start:dev": "tsx watch src/server.ts",
+    "lint": "eslint src --ext .ts --fix",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@rocketseat/eslint-config": "^2.2.2",
+    "@rocketseat/eslint-config": "2.2.2",
     "@types/bcryptjs": "2.4.6",
     "@types/node": "24.10.1",
     "eslint": "8.57.1",
