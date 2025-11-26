@@ -6,7 +6,9 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "lint": "eslint src --ext .ts --fix",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
     "@rocketseat/eslint-config": "2.2.2",
     "@types/bcryptjs": "2.4.6",
     "@types/node": "24.10.1",
+    "@vitest/coverage-v8": "4.0.10",
     "eslint": "8.57.1",
     "prisma": "7.0.0",
     "tsup": "8.5.1",
