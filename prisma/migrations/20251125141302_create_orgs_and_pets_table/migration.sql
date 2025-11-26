@@ -14,25 +14,15 @@ CREATE TYPE "Independence" AS ENUM ('Baixa', 'Moderada', 'Alta');
 CREATE TYPE "Environment" AS ENUM ('Pequeno', 'Moderado', 'Amplo');
 
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "orgs" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password_hash" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "orgs" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
     "cep" TEXT NOT NULL,
-    "adress" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
     "whatsapp" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "user_id" TEXT NOT NULL,
 
     CONSTRAINT "orgs_pkey" PRIMARY KEY ("id")
 );
@@ -54,10 +44,7 @@ CREATE TABLE "pets" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-
--- AddForeignKey
-ALTER TABLE "orgs" ADD CONSTRAINT "orgs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+CREATE UNIQUE INDEX "orgs_email_key" ON "orgs"("email");
 
 -- AddForeignKey
 ALTER TABLE "pets" ADD CONSTRAINT "pets_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "orgs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
